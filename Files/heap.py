@@ -1,0 +1,33 @@
+from heapq import heappush, heappop, heapify
+
+class MinHeap:
+
+    def __init__(self) -> None:
+        self.heap = []
+
+    def parent(self,i):
+        return (i-1)//2
+
+    def insertKey(self, k):
+        heappush(self.heap, k)
+
+    def decreaseKey(self, i, new_val):
+        self.heap[i] = new_val
+        
+        while(i!=0 and self.heap[self.parent(i)] > self.heap[i]):
+
+            # Swap heap[i] with heap[parent[i]]
+
+            self.heap[i], self.heap[self.parent(i)] =  self.heap[self.parent(i)], self.heap[i]
+
+    def extractMin(self):
+        return heappop(self.heap)
+
+    def deleteKey(self):
+        self.decreaseKey(0, float("-inf"))
+        self.extractMin()
+
+    def getMin(self):
+        return self.heap[0]
+
+        
