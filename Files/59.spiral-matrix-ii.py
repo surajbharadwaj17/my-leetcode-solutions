@@ -43,6 +43,56 @@
 # @lc code=start
 class Solution:
     def generateMatrix(self, n: int) -> List[List[int]]:
+         # Create an empty grid
+        grid = [[0]*n for _ in range(n) ]
+
+
+        rowStart, colStart = 0,0
+        rowEnd, colEnd = n-1, n-1
+
+        ele = 1
+
+        while(rowStart <= rowEnd and colStart <= colEnd):
+
+            # first row
+            i=colStart
+            while(i <= colEnd):
+                grid[rowStart][i] = ele
+                ele += 1
+                i += 1
+
+            rowStart += 1
+
+            # Last column
+            i = rowStart
+            while(i <= rowEnd):
+                grid[i][colEnd] = ele
+                ele += 1
+                i += 1
+
+            colEnd -= 1
+
+            # last row
+            i = colEnd
+            while (i >= colStart):
+                if rowStart <= rowEnd:    
+                    grid[rowEnd][i] = ele
+                    ele += 1
+                i -= 1
+
+            rowEnd -= 1
+
+            # First column
+            i = rowEnd
+            while(i >= rowStart):
+                if colStart <= colEnd:
+                    grid[i][colStart] = ele
+                    ele += 1
+                i -= 1
+
+            colStart += 1
+
+        return grid   
         
 # @lc code=end
 
