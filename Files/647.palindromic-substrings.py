@@ -7,33 +7,36 @@
 # @lc code=start
 
 
+from functools import lru_cache
+
+
 class Solution:
     def countSubstrings(self, s: str) -> int:
-        ret_cnt = 0
 
-        self.memo = [[0 for _ in range(len(s))] for x in range(len(s))]
+        @lru_cache(None)
+        def isPalindrome(left, right):
+            if left > right:
+                return True 
+            
+            if s[left] != s[right]:
+                return False
 
-        for i in range(len(s)):
-            for j in range(i, len(s)):
-                ret_cnt += self.isPalindrome(s,i, j)
+            else:
+                return isPalindrome(left+1, right-1)
 
-        print(self.memo)
 
-        return ret_cnt
+        ret = 0
+        n = len(s)
 
-    def isPalindrome(self, s, left, right):
-        if left >= right:
-            return 1
-        
-        if self.memo[left][right] >= 0:
-            return self.memo[left][right] 
+        for i in range(n):
+            for j in range(i,n):
+                if isPalindrome(i,j):
+                    ret += 1
 
-        if s[left] == s[right]:
-            self.memo[left][right] = self.isPalindrome(s,left+1,right-1)
-            return self.memo[left][right]
+        return ret
 
-        else:
-            return 0
+    
+
 
 
 # @lc code=end
