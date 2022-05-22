@@ -70,6 +70,22 @@
 # @lc code=start
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        ret = []
+        path = []
+        nums = list(range(1,10))
+        self.dfs(nums, ret, k, path, n)
+        return ret
+
+    def dfs(self, nums, ret, k, path, target):
+        if target < 0 or k < 0:
+            return      # Backtrack
         
+        if target == 0 and k == 0:
+            ret.append(path)
+            return
+
+        for i in range(len(nums)):
+            self.dfs(nums[i+1:], ret, k-1, path + [nums[i]], target-nums[i])
+
 # @lc code=end
 
