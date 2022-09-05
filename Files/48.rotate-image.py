@@ -52,15 +52,31 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        # Reverse by rows
-        matrix.reverse()
+        # # Reverse by rows
+        # matrix.reverse()
 
-        # Swap all the elements
+        # # Swap all the elements
+        # for i in range(len(matrix)):
+        #     for j in range(i+1, len(matrix[i])):
+        #         temp = matrix[i][j]
+        #         matrix[i][j] = matrix[j][i]
+        #         matrix[j][i] = temp
+        
+        # Reverse
+        left, right = 0, len(matrix)-1
+        while(left<right):
+            matrix[left], matrix[right] = matrix[right], matrix[left]
+            left += 1
+            right -= 1
+
+        # Transpose
         for i in range(len(matrix)):
-            for j in range(i+1, len(matrix[i])):
-                temp = matrix[i][j]
-                matrix[i][j] = matrix[j][i]
-                matrix[j][i] = temp
+            for j in range(i):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+        
+        
+        
+
 
             
         

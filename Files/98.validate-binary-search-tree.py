@@ -60,7 +60,14 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+    def isValidBST(self, root: Optional[TreeNode], floor=float('-inf'), ceil=float('inf')) -> bool:
         
+        if not root:
+            return True
+        if root.val <= floor and root.val >= ceil:
+            return False
+
+        return self.isValidBST(root.left, min(floor, root.val), ceil) and self.isValidBST(root.right, floor, max(root.val, ceil))
+
 # @lc code=end
 
