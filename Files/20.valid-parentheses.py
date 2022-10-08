@@ -59,24 +59,22 @@
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
-        
-        open_list = ['(','[','{']
-        close_list = [')',']','}']
-        
-        for i in range(len(s)):
-            if s[i] in open_list:
-                stack.append(s[i])
-            elif s[i] in close_list:
-                pos = close_list.index(s[i])
-                if len(stack) > 0 and open_list[pos] == stack[len(stack)-1]:
+        hmap = {
+            ")" : "(",
+            "}" : "{",
+            "]" : "["
+        }
+        for char in s:
+            if char in hmap.values():
+                stack.append(char)
+            elif char in hmap.keys():
+                if stack and stack[-1] == hmap[char]:
                     stack.pop()
                 else:
                     return False
+
+        return len(stack) == 0
         
-        if len(stack) == 0:
-            return True
-        else:
-            return False
         
 # @lc code=end
 
