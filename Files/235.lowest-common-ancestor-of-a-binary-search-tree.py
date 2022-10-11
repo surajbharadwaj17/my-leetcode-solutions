@@ -69,18 +69,11 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-
-        """
-        Approach: 
-
-        Traverse through the tree and check if both p and q lie on the same side of the tree 
-        """
-
+        # Start with the root and check if p,q lie on the same side of the tree.
+        # Move root to the appropriate child based on the conditions.
         while(root):
-
             if root.val > p.val and root.val > q.val:
                 root = root.left
-
             elif root.val < p.val and root.val < q.val:
                 root = root.right
             else:
