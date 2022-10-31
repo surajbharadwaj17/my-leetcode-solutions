@@ -7,6 +7,7 @@
 # @lc code=start
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
+        # Sliding window
         cur_sum, final_sum = 0, nums[0]
         for i in range(len(nums)):
             if cur_sum < 0:

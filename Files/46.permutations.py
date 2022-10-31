@@ -54,6 +54,8 @@ class Solution:
             rest = nums[:i] + nums[i+1:]
             self.dfs(rest, path + [nums[i]], ret)
 
+    # Time complexity : O(N!*N*N)
+
 
 # @lc code=end
 
