@@ -17,13 +17,6 @@ class Solution:
         return self.ret
 
     def dfs(self, i,j,grid):
-        # if(j>=len(grid[0]) or i>=len(grid) or grid[i][j]!=grid[i][j+1]):
-        #     self.ret.append(j)
-        
-        # if grid[i][j] == 1:
-        #     self.dfs(i+1, j+1, grid)
-        # else:
-        #     self.dfs(i+1, j-1, grid)
 
         if i == self.m:
             return j

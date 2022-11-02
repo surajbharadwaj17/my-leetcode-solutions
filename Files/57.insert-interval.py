@@ -7,34 +7,21 @@
 # @lc code=start
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+
+        # Finding the left and right subparts at the newInterval
+
         left, right = [], []
-        start, end = newInterval[0], newInterval[1]
+        start, end = newInterval[0], newInterval[1]     # Very imp to keep track of the current minimum start and end 
         for interval in intervals:
-            if interval[1] < start:
-                 left.append(interval)
-            elif interval[0] > end:
+            if interval[1] < newInterval[0]:
+                left.append(interval)
+            elif interval[0] > newInterval[1]:
                 right.append(interval)
             else:
-                start = min(start, interval[0])
-                end = max(end, interval[1])
+                start = min(interval[0], start)
+                end = max(interval[1], end)
 
         return (left + [[start, end]] + right)
 
-        # start, end = newInterval[0], newInterval[1]
-
-        # left, right = [],[]
-
-        # for interval in intervals:
-        #     if interval[1] < start:
-        #         left += interval,
-        #     elif interval[0] >  end:
-        #         right += interval,
-        #     else:
-        #         start = min(start, interval[0])
-        #         end = max(end, interval[1])
-
-        
-        # return(left + [[start,end]] + right)
-        
 # @lc code=end
 

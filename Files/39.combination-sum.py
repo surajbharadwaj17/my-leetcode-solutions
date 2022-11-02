@@ -65,19 +65,31 @@
 
 # @lc code=start
 class Solution:
+
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         ret = []
-        self.dfs(candidates, target, [], ret)
+        self.dfs(candidates, target, ret, [])
         return ret
-        
-    def dfs(self, nums, target, path, ret):
-        
-        if target < 0:
-            return
-        if target == 0:
+
+    def dfs(self, nums, target, ret, path):
+        # Base case
+        if target < 0: return 
+
+        if target == 0:     # Success case - Add the current path to result 
             ret.append(path)
-            
+            return
+        
         for i in range(len(nums)):
-            self.dfs(nums[i:], target-nums[i], path+[nums[i]], ret)
+            self.dfs(nums[i:], target-nums[i], ret, path+[nums[i]])
+
+                # for each occurence of i, we have n-i possible paths
+
+    # I think the time complexity is O(N + N)
+
+
+
+
+
+    
 # @lc code=end
 

@@ -14,11 +14,11 @@ class Solution:
             p *= nums[i]
 
         p = 1
-        for i in range(len(nums), -1, -1):
+        for i in range(len(nums)-1, -1, -1):
             ret[i] *= p
             p *= nums[i]
 
-        return
+        return ret
         
 # @lc code=end
 
