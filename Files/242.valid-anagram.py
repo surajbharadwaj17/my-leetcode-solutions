@@ -8,6 +8,10 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         import collections
+        # If s and t are not of the same length, they are not anagrams.
+        # Count the characters in one string. 
+        # For each occurrence of the char in other string, decrement the count in s
+        # At the end, if both strings are anagrams, all the counts will be zero
 
         count = collections.Counter(s)
         for char in t:

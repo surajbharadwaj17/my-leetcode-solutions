@@ -15,7 +15,8 @@ class Solution:
             else:
                 hash.remove(char)
 
-        # Hash will contain oddCharacters. Subtract from the length of s will be the length of longest palindrome
+        # Hash will contain odd characters. 
+        # Subtract from the length of s will be the length of longest palindrome
 
         if len(hash) == 0:
             return len(s)

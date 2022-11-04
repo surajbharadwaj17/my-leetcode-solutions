@@ -11,9 +11,13 @@ class Solution:
         used = {}
 
         for i, char in enumerate(s):
-            if char in used and start <= used[char]:
+            # If we encounter an already seen char and the last occurrence of that char 
+            # is actually smaller than the starting index, we found a repeating character. 
+            # so change the starting point
+            if char in used and start <= used[char]: 
                 start = used[char] + 1
             else:
+                # If it is a non-repeating character, update the max length
                 mx_len = max(mx_len, i-start+1)
             used[char] = i
             
