@@ -5,54 +5,12 @@
 #
 
 # @lc code=start
-
+import collections
 class Solution:
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
-        # def dist(i,j):
-        #     # BFS template?
-        #     #queue
-        #     q = [(i,j,0)]
-
-        #     # set to keep track of visited items
-        #     visited = set()
-
-        #     # all the directions one can go from (i,j)
-        #     dirs = [
-        #         (1,0),
-        #         (0,1),
-        #         (-1,0),
-        #         (0,-1)
-        #     ]
-
-        #     # while all the directions are covered
-
-        #     while(q):
-        #         for i in range(len(q)):
-        #             x,y,d = q.pop(0)
-        #             if mat[x][y] == 0:
-        #                 return d
-        #             visited.add((x,y))
-
-        #             for dir in dirs:
-        #                 new_x, new_y = x+dir[0], y+dir[1]
-        #                 if new_x >= 0 and new_x <= len(mat)-1 \
-        #                     and new_y >= 0 and new_y <= len(mat[0])-1:
-        #                     if (new_x, new_y) not in visited:
-        #                         q.append((new_x, new_y, d+1))
-
-        #     return -1
-
         m,n = len(mat), len(mat[0])
-        # ret = [[ 0 for x in range(n) ] for _ in range(m)]
-        q = []
-        visited = set()
-        dirs = [
-                (1,0),
-                (0,1),
-                (-1,0),
-                (0,-1)
-            ]
-
+        dirs = ((0,1), (0,-1), (-1,0), (1,0))
+        q = collections.deque()
         for i in range(m):
             for j in range(n):
                 if mat[i][j] == 0:
@@ -61,16 +19,18 @@ class Solution:
                     mat[i][j] = -1
 
         while(q):
-            x,y = q.pop(0)
+            cur_i, cur_j = q.popleft()
+
             for dir in dirs:
-                new_x, new_y = x+dir[0], y+dir[1]
-                if new_x >= 0 and new_x <= len(mat)-1 and new_y >= 0 and new_y <= len(mat[0])-1 and mat[new_x][new_y] == -1:
-                    mat[new_x][new_y] = mat[x][y]+1
-                    visited.add((new_x, new_y))
-                    q.append((new_x, new_y))
-
+                next_i, next_j = cur_i+dir[0], cur_j+dir[1]
+                if next_i < 0 or next_i >= m \
+                    or next_j < 0 or next_j >= n \
+                                or mat[next_i][next_j] != -1:
+                    continue
+                mat[next_i][next_j] = mat[cur_i][cur_j]+1
+                q.append((next_i, next_j))
+        
         return mat
-
        
                         
                              

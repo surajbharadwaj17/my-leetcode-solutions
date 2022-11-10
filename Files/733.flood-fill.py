@@ -7,23 +7,28 @@
 # @lc code=start
 class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
-        self.m, self.n = len(image), len(image[0])
-        self.cur_color = image[sr][sc]
-        self.color = color
-        self.dfs(sr, sc, image)
+
+
+        m,n = len(image), len(image[0])
+
+        cur_color = image[sr][sc]
+        dirs = ((0,1),(0,-1),(-1,0),(1,0))
+
+        # DFS 
+        def dfs(sr, sc):
+            # Base 
+            if 0 <= sr < m and 0 <= sc < n and image[sr][sc] == cur_color and image[sr][sc] != color:
+                image[sr][sc] = color 
+
+
+                dfs(sr+1, sc)
+                dfs(sr-1, sc)
+                dfs(sr, sc+1)
+                dfs(sr, sc-1)
+
+        dfs(sr,sc)
+
         return image
-
-    def dfs(self, i,j, image):
-        # Base 
-        if i < 0 or i >= self.m or j < 0 or j >= self.n or  image[i][j] == self.color or image[i][j] != self.cur_color:
-            return
-
-        image[i][j] = self.color
-
-        self.dfs(i+1, j, image)
-        self.dfs(i-1, j, image)
-        self.dfs(i, j+1, image)
-        self.dfs(i, j-1, image)
         
 # @lc code=end
 

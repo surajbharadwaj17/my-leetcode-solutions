@@ -7,6 +7,7 @@
 # @lc code=start
 
 # Definition for a Node.
+
 class Node:
     def __init__(self, val = 0, neighbors = None):
         self.val = val
@@ -15,21 +16,29 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
-        hmap = {}
+        graph = {}
 
         def dfs(node):
-            if not node:
-                return 
-            node_copy = Node(node.val)
-            hmap[node] = node_copy
+            # base condition
+            if not node: return
 
-            for n in node.neighbors:
-                if n in hmap:
-                    node_copy.neighbors.append(hmap[n])
+            # create a copy
+            copy = Node(node.val)
+
+            # update in graph
+            graph[node] = copy
+
+            # dfs for neighbors
+            for nei in node.neighbors:
+                if nei in graph:
+                    copy.neighbors.append(graph[nei])
                 else:
-                    node_copy.neighbors.append(dfs(n))
-            return node_copy
+                    copy.neighbors.append(dfs(nei))
+            
+            return copy
 
         return dfs(node)
+
+
 # @lc code=end
 
