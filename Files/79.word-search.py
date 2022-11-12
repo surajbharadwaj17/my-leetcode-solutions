@@ -75,11 +75,11 @@ class Solution:
             
             if (r<0 or c<0
                 or r >= nrow or c >= ncol
-                or word[i] != board[r][c]
-                or (r,c) in path ):
+                or word[i] != board[r][c]):
                 return False
 
-            path.add((r,c))
+            temp = board[r][c]
+            board[r][c] = "#"
 
             ret = ((dfs(r+1,c,i+1)) or
                     (dfs(r-1,c,i+1)) or
@@ -87,7 +87,7 @@ class Solution:
                             (dfs(r,c-1,i+1)))
 
 
-            path.remove((r,c))
+            board[r][c] = temp
 
             return ret
 

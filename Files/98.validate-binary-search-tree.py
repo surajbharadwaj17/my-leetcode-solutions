@@ -64,10 +64,11 @@ class Solution:
         
         if not root:
             return True
-        if root.val <= floor and root.val >= ceil:
+        if root.val <= floor or root.val >= ceil:
             return False
 
-        return self.isValidBST(root.left, min(floor, root.val), ceil) and self.isValidBST(root.right, floor, max(root.val, ceil))
+        # When searching in left tree, ceil will be root.val and when searching right tree, floor will be root.val
+        return self.isValidBST(root.left, floor, root.val) and self.isValidBST(root.right, root.val, ceil)
 
 # @lc code=end
 
