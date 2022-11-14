@@ -23,10 +23,6 @@ class Solution:
 
             if fast == slow:
                 return True
-            # if fast not in visited:
-            #     visited.add(fast)
-            # else:
-            #     return True
             
         return False
 # @lc code=end

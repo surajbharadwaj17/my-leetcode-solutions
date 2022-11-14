@@ -57,15 +57,16 @@
 #         self.right = right
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+
         level = [root]
         ret = []
         while(level and root):
             ret.append([ele.val for ele in level])
-            
-            LRpairs = [(node.left, node.right) for node in level]
-            level = [leaf for LR in LRpairs for leaf in LR if leaf]
-        return ret
 
+            lr_pairs = [(node.left, node.right) for node in level]
+            level = [ leaf for lr in lr_pairs for leaf in lr if leaf]
+
+        return ret
 
 # @lc code=end
 

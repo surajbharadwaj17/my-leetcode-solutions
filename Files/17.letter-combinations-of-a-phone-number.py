@@ -58,7 +58,7 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
 
-
+        # Key - letter mapping
         key_map = {
             2 : ['a','b','c'],
             3 : ['d','e','f'],
@@ -70,7 +70,7 @@ class Solution:
             9 : ['w','x','y','z']
         }
         
-
+        # Base cases
         if len(digits) == 0:
             return []
 
@@ -80,6 +80,7 @@ class Solution:
         ret = [''] if digits else []
 
         for digit in digits:
+            # for all mappings of digit, for all p in result, add p+q to the result
             ret = [p+q for p in ret for q in key_map[int(digit)]]
 
         return ret

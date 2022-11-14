@@ -49,25 +49,19 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
 
-        # DFS
-    #     ret = []
-    #     self.dfs(nums, [], ret)
-    #     return ret
+        ret = []
+        path = []
+        return self.dfs(nums, ret, path)
 
+    def dfs(self, nums, ret, path):
 
-    # def dfs(self, nums, path, ret):
-    #     ret.append(path)
-    #     for i in range(len(nums)):
-            # self.dfs(nums[i+1:], path + [nums[i]], ret)
+        # Add every path
+        ret.append(path)
 
-
-        #Iterative
-        ret = [[]]
-        for num in nums:
-            ret += [item+[num]  for item in ret]
-
-
-        return ret        
+        for i in range(len(nums)):
+            self.dfs(nums[i+1:], ret, path + [nums[i]])
+        
+        return ret
 
         
 # @lc code=end

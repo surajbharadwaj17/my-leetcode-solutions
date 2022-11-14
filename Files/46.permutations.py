@@ -47,9 +47,11 @@ class Solution:
         return ret
 
     def dfs(self, nums, path, ret):
+        # Recursive or Backtracking function to find the permute of n-1 items
         if not nums:
             ret.append(path)
 
+        # Recusively find the permute for rest and add the current item to path
         for i in range(len(nums)):
             rest = nums[:i] + nums[i+1:]
             self.dfs(rest, path + [nums[i]], ret)
