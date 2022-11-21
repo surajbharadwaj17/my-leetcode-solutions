@@ -48,6 +48,22 @@
 # @lc code=start
 class Solution:
     def trap(self, height: List[int]) -> int:
-        pass
+        left, right = 0, len(height)-1
+        max_l, max_r = 0,0
+        count = 0
+        while (left <= right):
+            if height[left] <= height[right]:
+                if height[left] >= max_l:
+                    max_l = height[left]
+                else:
+                    count += max_l-height[left]
+                left += 1   
+            else:
+                if height[right] >= max_r:
+                    max_r = height[right]
+                else:
+                    count += max_r-height[right]
+                right -= 1 
+        return count
 # @lc code=end
 

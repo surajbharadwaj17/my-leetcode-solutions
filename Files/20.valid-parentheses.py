@@ -64,10 +64,11 @@ class Solution:
             "}" : "{",
             "]" : "["
         }
+        
         for char in s:
             if char in hmap.values():
                 stack.append(char)
-            elif char in hmap.keys():
+            elif char in hmap:
                 if stack and stack[-1] == hmap[char]:
                     stack.pop()
                 else:
