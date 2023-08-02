@@ -65,38 +65,30 @@
 # @lc code=start
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
+        if not board:
+            return 
 
-        nrow, ncol = len(board), len(board[0])
-        path = set()
-
-        def dfs(r,c,i):
-            if i == len(word):
-                return True
-            
-            if (r<0 or c<0
-                or r >= nrow or c >= ncol
-                or word[i] != board[r][c]):
-                return False
-
-            temp = board[r][c]
-            board[r][c] = "#"
-
-            ret = ((dfs(r+1,c,i+1)) or
-                    (dfs(r-1,c,i+1)) or
-                        (dfs(r,c+1,i+1)) or
-                            (dfs(r,c-1,i+1)))
-
-
-            board[r][c] = temp
-
-            return ret
-
-        for r in range(nrow):
-            for c in range(ncol):
-                if dfs(r,c,0):
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if self.dfs(word, i,j,board):
                     return True
 
         return False
+    
+    def dfs(self,word, i,j,board):
+        
+        if len(word) == 0:
+            return True
+
+        if i<0 or i >= len(board) or j<0 or j >= len(board[0]) or word[0] != board[i][j]:
+            return False
+
+        temp = board[i][j]
+        board[i][j] = '*'
+        ret = self.dfs(word[1:], i+1, j, board) or self.dfs(word[1:], i-1, j, board) or self.dfs(word[1:], i, j+1, board) or self.dfs(word[1:], i, j-1, board)
+
+        board[i][j] = temp
+        return ret  
 
         
 # @lc code=end
